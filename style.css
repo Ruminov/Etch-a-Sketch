@@ -8,18 +8,31 @@ body {
   padding: 0;
 }
 
-.container {
+body {
   display: flex;
-  flex-wrap: wrap;
-  max-width: 640px;
-  max-height: 640px;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
 }
 
-.container > div {
-  color: red;
-  width: 40px;
-  height: 40px;
-  background-color: #0f0;
-  border: 1px solid #000;
-  /* transition: background-color 0.1s ease; */
+.container {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #808080;
+  width: 600px;
+  height: 600px;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+.row,
+.column {
+  background-color: #a5adb1;
+  flex: 1 1 auto;
+}
+
+.column {
+  border: 1px solid #919191;
 }
