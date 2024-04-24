@@ -1,0 +1,25 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 640px;
+  max-height: 640px;
+}
+
+.container > div {
+  color: red;
+  width: 40px;
+  height: 40px;
+  background-color: #0f0;
+  border: 1px solid #000;
+  /* transition: background-color 0.1s ease; */
+}
