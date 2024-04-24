@@ -13,24 +13,30 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100svh;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .wrapper {
-  padding: 32px;
-  padding-bottom: 0;
+  padding: 8px 32px 16px;
+  /* padding-bottom: 0; */
   display: flex;
+  gap: 8px;
   flex-direction: column;
   align-items: center;
   background-color: #d50a09;
-  border-radius: 12px;
+  border-radius: 14px;
 }
 
 .container {
+  border-radius: 12px;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  border: 1px solid #808080;
+  /* border: 1px solid #7c6464; */
   width: 500px;
   height: 500px;
+  box-shadow: 0px 0px 1px 6px #d83535;
 }
 
 .row {
@@ -45,14 +51,47 @@ body {
 
 .controls {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 16px;
   width: 100%;
+  margin-top: 10px;
 }
 
 button {
-  background-color: #e6e6e6;
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  border: 2px dotted #d50a09;
+  background-color: #fa1e1e;
+  width: 55px;
+  height: 24px;
+  border-radius: 6px;
+  border: none;
+  box-shadow: 0px 0px 4px 4px #9e0606;
+}
+
+p {
+  color: #e6e6e6;
+  margin: 0;
+  text-align: center;
+  font-family: Calibri;
+}
+
+@font-face {
+  font-family: "Lobster";
+  src: url(fonts/Lobster.ttf);
+}
+
+#logo {
+  font-family: "Lobster";
+  font-size: 40px;
+  line-height: 1;
+
+  position: relative;
+  background-image: linear-gradient(
+    to right,
+    #ce9745 0%,
+    #f6e27a 25%,
+    #f7f2b8 50%,
+    #f6e27a 75%,
+    #cb9b51 100%
+  );
+  color: transparent;
+  -webkit-background-clip: text;
 }

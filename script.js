@@ -1,9 +1,13 @@
 const container = document.querySelector(".container");
+const clearBtn = document.querySelector("#clear");
+const resizeBtn = document.querySelector("#resize");
+const randomBtn = document.querySelector("#random");
 let gridSize = 16;
+let drawing = false;
+let color = "black";
 
 // Add squares
 function createSquares() {
-  opacity = 100;
   for (let i = 0; i < gridSize; i++) {
     const row = document.createElement("div");
     row.classList.add("row");
@@ -17,23 +21,18 @@ function createSquares() {
 }
 
 // Add color
-
-const randInt = () => Math.floor(Math.random() * 256);
-let opacity = 100;
 function changeSquareColor(e) {
-  if (e.target.matches(".column")) {
-    const [r, g, b] = [randInt(), randInt(), randInt()];
+  e.preventDefault();
+  if (e.target.matches(".column") && color === "random") {
+    const r = Math.floor(Math.random() * 256);
+    const g = Math.floor(Math.random() * 256);
+    const b = Math.floor(Math.random() * 256);
     e.target.style.backgroundColor = `RGB(${r},${g},${b})`;
-
-    // Add opacity in each iteration
-    e.target.style.opacity = `${opacity}%`;
-    if (opacity) {
-      opacity -= 10;
-    }
+  }
+  if (e.target.matches(".column") && color === "black") {
+    e.target.style.backgroundColor = `#4D4946`;
   }
 }
-
-container.addEventListener("mouseover", changeSquareColor);
 
 // Clear
 function clearSquares() {
@@ -41,13 +40,10 @@ function clearSquares() {
   createSquares();
 }
 
-const clearBtn = document.querySelector(".clear");
-clearBtn.addEventListener("click", clearSquares);
-
 // Resize
 function resizeSquares() {
-  input = +prompt("Number of squares per side (maximum 100)");
-  if (input && typeof input === "number") {
+  input = +prompt("Number of squares per side (max 64)");
+  if (input && typeof input === "number" && input <= 64) {
     gridSize = input;
     clearSquares();
   } else {
@@ -55,7 +51,22 @@ function resizeSquares() {
   }
 }
 
-const resizeBtn = document.querySelector(".resize");
+container.addEventListener("mousedown", (e) => {
+  drawing = true;
+  changeSquareColor(e);
+});
+container.addEventListener("mouseover", (e) => {
+  if (!drawing) return;
+  changeSquareColor(e);
+});
+container.addEventListener("mouseup", () => {
+  drawing = false;
+});
+
+clearBtn.addEventListener("click", clearSquares);
 resizeBtn.addEventListener("click", resizeSquares);
+randomBtn.addEventListener("click", () => {
+  color = "random";
+});
 
 createSquares();
