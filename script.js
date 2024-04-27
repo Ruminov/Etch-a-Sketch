@@ -2,9 +2,13 @@ const container = document.querySelector(".container");
 const clearBtn = document.querySelector("#clear");
 const resizeBtn = document.querySelector("#resize");
 const randomBtn = document.querySelector("#random");
+const opacityBtn = document.querySelector("#opacity");
 let gridSize = 16;
 let drawing = false;
 let color = "black";
+let opacity = false;
+let isIcreasing = true;
+let opacityLevel = 100;
 
 // Add squares
 function createSquares() {
@@ -23,21 +27,16 @@ function createSquares() {
 // Add color
 function changeSquareColor(e) {
   e.preventDefault();
-  if (e.target.matches(".column") && color === "random") {
+  if (!e.target.matches(".column")) return;
+  if (color === "random") {
     const r = Math.floor(Math.random() * 256);
     const g = Math.floor(Math.random() * 256);
     const b = Math.floor(Math.random() * 256);
     e.target.style.backgroundColor = `RGB(${r},${g},${b})`;
   }
-  if (e.target.matches(".column") && color === "black") {
-    e.target.style.backgroundColor = `#4D4946`;
-  }
-}
+  if (color === "black") e.target.style.backgroundColor = `#4D4946`;
 
-// Clear
-function clearSquares() {
-  container.innerHTML = "";
-  createSquares();
+  if (opacity) changeOpacity(e);
 }
 
 // Resize
@@ -49,6 +48,31 @@ function resizeSquares() {
   } else {
     alert("Insert a valid number");
   }
+}
+
+// Opacity
+function changeOpacity(e) {
+  e.target.style.opacity = `${opacityLevel}%`;
+
+  if (isIcreasing) {
+    opacityLevel -= 10;
+    if (opacityLevel <= 0) {
+      isIcreasing = false;
+      value = 0;
+    }
+  } else {
+    opacityLevel += 10;
+    if (opacityLevel >= 100) {
+      isIcreasing = true;
+      opacityLevel = 100;
+    }
+  }
+}
+
+// Clear
+function clearSquares() {
+  container.innerHTML = "";
+  createSquares();
 }
 
 container.addEventListener("mousedown", (e) => {
@@ -63,10 +87,13 @@ container.addEventListener("mouseup", () => {
   drawing = false;
 });
 
-clearBtn.addEventListener("click", clearSquares);
 resizeBtn.addEventListener("click", resizeSquares);
 randomBtn.addEventListener("click", () => {
-  color = "random";
+  color = color === "black" ? "random" : "black";
 });
+opacityBtn.addEventListener("click", () => {
+  opacity = !opacity;
+});
+clearBtn.addEventListener("click", clearSquares);
 
 createSquares();
