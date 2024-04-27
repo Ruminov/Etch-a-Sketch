@@ -1,5 +1,5 @@
 # Etch-a-Sketch
 
-Live preview:
+[Live preview]()
 
 ![Etch a sketch](imgs/image.png)
