@@ -1,3 +1,5 @@
 # Etch-a-Sketch
 
-TBD
+Live preview:
+
+![Etch a sketch](imgs/image.png)
